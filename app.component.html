@@ -1,0 +1,100 @@
+
+
+    
+    <div *ngIf ="!name;else forminfo">
+      <form [formGroup]="rForm" (ngSubmit)="addPost(rForm.value)">
+        <div class="form-container">
+          <div class="row columns">
+            <h1>My Profile Information</h1>
+            <label>Name,Surname
+                <input type="text" formControlName="name" >
+            </label>
+            <div class="alert" *ngIf="!rForm.controls['name'].valid && rForm.controls['name'].touched">
+              {{ titleAlert }}</div>
+  
+            <label>Email
+                <input type="text" formControlName="email" ng-model="somefield">
+            </label>
+          
+        
+              <div class="alert" *ngIf="!rForm.controls['email'].valid && rForm.controls['email'].errors.required && rForm.controls['email'].touched">
+            {{titleAlert}}</div>
+            
+            
+            <div class="alert" *ngIf="!rForm.controls['email'].valid && rForm.controls['email'].errors.invalidEmail">
+                  {{wrongEmailPatternAlert}}
+            </div>
+          
+            <label>Designation
+              <input type="text" formControlName="designation" >
+          </label>
+          <div class="alert" *ngIf="!rForm.controls['designation'].valid && rForm.controls['designation'].touched">
+            {{ titleAlert }}</div>
+
+            <label>Team Name</label>
+              <!-- <select formControlName="teamNameControl" >
+                <option [ngValue]="team" *ngFor="let team of teams">{{team}}</option>
+              </select> -->
+              <mat-form-field>
+                <input type="text" placeholder="auto" matInput [formControl]="myControl" aria-label="Number" [matAutocomplete]="auto"  >
+                <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option *ngFor="let team of teams" [value]="team">
+                    {{ team }}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+
+
+
+              <br>
+              
+             
+              
+           
+              <span>
+                <input type="text" formControlName="newTeamControl" value="Enter the name of new team">
+                <input type="button" value="Add New Team" (click)="addToTeamList()">
+              </span>
+            
+         
+          
+        
+            <label>Skill tag
+              <input type="text" formControlName="skill" >
+          </label>
+          <div class="alert" *ngIf="!rForm.controls['skill'].valid && rForm.controls['skill'].touched">
+            {{ titleAlert }}</div>
+
+              <label>Phone number
+                <input type="text" formControlName="phoneNumber">
+              </label>
+            
+              <div class="alert" *ngIf="!rForm.controls['phoneNumber'].valid && rForm.controls['phoneNumber'].touched">
+                 {{phonePatternAlert}}</div>
+            
+            
+
+  
+            <input type="submit" class="button expanded" value="Save Changes" [disabled]="!rForm.valid">
+            
+  
+          </div>
+        </div>
+  
+      </form>
+    </div>
+
+
+<ng-template #forminfo>
+  <div class="form-container">
+    <div class="row columns">
+      <h1>{{name}}</h1>
+      <p>{{email}}</p>
+      <p>{{designation}}</p>
+      <p>{{teamName}}</p>
+      <p>{{phoneNumber}}</p>
+      <p>{{skill}}</p>
+    </div>
+    <input type="button" class="button-expanded " value="Update Profile">
+  </div>
+</ng-template>
